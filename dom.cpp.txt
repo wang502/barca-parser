@@ -1,0 +1,13 @@
+#include <iostream>
+#include <algorithm>
+#include <ctring>
+#include <cmath>
+
+using namespace std;
+
+class Dom{
+	public:
+		string tag_name;
+		string name;
+		string id;
+};
