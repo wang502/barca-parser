@@ -86,7 +86,7 @@ vector<attribute*> extract_attrs(string str){
 			str = str.substr(end2+1);
 		}
 		else {
-			cout<<"Parsing Erroe..."<<endl;
+			cout<<"Parsing Error..."<<endl;
 		}
 	}
 	words.push_back(str.substr(start));
@@ -100,7 +100,7 @@ vector<attribute*> extract_attrs(string str){
 
 // parse the start/end tag
 // returen the tag name & store attributes in attrs
-char* parse_tag(char *tag, vector<attribute*>& attrs){
+char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 	if (*tag == '/'){
 		tag++;
 		char *tagName = new char[10];
@@ -129,7 +129,29 @@ char* parse_tag(char *tag, vector<attribute*>& attrs){
 
 			// skip the space
 			i++;
-			if (*(strtag.end()-1) != '>'){cout<<"Parsing Error";}
+			// having texts followed
+			if (*(strtag.end()-1) != '>'){
+				int sep;
+				if ((sep = strtag.find(">")) != string::npos){
+					// extract attributes
+					string terminate = ">";
+					int size = strtag.find(terminate) - (strlen(tagName)+1);
+					cout<<"size "<<size<<endl;
+					cout<<strlen(tagName)<<endl;
+					string to_extract_attrs = strtag.substr(i, size);
+					attrs = extract_attrs(to_extract_attrs);
+
+					// extract text
+					string extracted_text = strtag.substr(strtag.find(">")+1);
+					text = extracted_text; 
+					return tagName;
+				}
+				else {
+					cout<<"Parsing Error";
+					return tagName;
+				}
+			}
+			// not havinf texts followeds
 			else{
 				string terminate = ">";
 				int size = strtag.find(terminate) - (strlen(tagName)+1);
@@ -157,8 +179,9 @@ char* parse_tag(char *tag, vector<attribute*>& attrs){
 struct endTag* creat_end_tag(char *tag){
 	char *tagName;
 	vector<attribute*> attrs;
+	string text;
 	try{
-		tagName = parse_tag(tag, attrs);
+		tagName = parse_tag(tag, attrs, text);
 	}
 	catch(exception& e){
 		cout<<"Get tag name exception: "<<e.what()<<endl;
@@ -178,8 +201,10 @@ struct endTag* creat_end_tag(char *tag){
 struct startTag* create_start_tag(char *tag){
 	char *tagName;
 	vector<attribute*> attrs;
+	string text;
 	try{
-		tagName = parse_tag(tag, attrs);
+		// when parsing the tag, read in the attributes and text to the tag object
+		tagName = parse_tag(tag, attrs, text);
 	}
 	// catch exeption
 	catch(exception& e){
@@ -190,6 +215,7 @@ struct startTag* create_start_tag(char *tag){
 		string strName(tagName);
 		cout<<strName<<endl;
 		st = new startTag(strName, true, false, attrs);
+		st->text = text;
 	}
 	cout<<st->name<<endl;
 	cout<<st->is_start_tag<<endl;
@@ -216,7 +242,7 @@ int main(){
 	//char tag[] = "div id='layout1' name='l1'>";
 	//char *tagName = getTagName(tag);
 	//struct startTag *st = createStartTag(tag);
-	char chars[] = "<ll name=layout id='l1'>";
+	char chars[] = "<ll name=layout id='l1'>This is paragraph";
 	//string str(chars);
 	//string sep = "=";
 	//cout<<str.find(sep);
@@ -224,8 +250,10 @@ int main(){
 	//cout<<str<<endl;
 		
 	vector<attribute*> attrs;
-	char *tagname = parse_tag(chars, attrs);
+	string text;
+	char *tagname = parse_tag(chars, attrs, text);
 	cout<<tagname<<endl;	
 	print_attrs(attrs);
+	cout<<"text: "<<text<<endl;
 	cout<<endl;
 }

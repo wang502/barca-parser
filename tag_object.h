@@ -22,6 +22,7 @@ struct startTag{
 	bool is_start_tag;
 	bool is_end_tag;
 	vector<attribute*> attrs;
+	string text;
 	startTag(string name, bool start, bool end, vector<attribute*> attrs):name(name), is_start_tag(start), is_end_tag(end), attrs(attrs){}
 };
 
