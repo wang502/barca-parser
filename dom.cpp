@@ -27,6 +27,10 @@ class Dom{
 
 		void add_child(Dom *d);
 
+		// check whether the str is same as 
+		// the tag name, name attribute of id attribute
+		bool is_tag(string str);
+
 		~Dom();
 };
 
@@ -68,6 +72,20 @@ vector<Dom*> Dom::get_children(){
 		cout<<e.what();
 	}
 	return childs;
+}
+
+bool Dom::is_tag(string str){
+	if (self->name == str){
+		return true;
+	}
+	else {
+		for (int i=0; i<self->attrs.size();i++){
+			if (self->attrs[i]->value == str){
+				return true;
+			}
+		}
+		return false;
+	}
 }
 
 Dom::~Dom(void){
