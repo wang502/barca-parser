@@ -199,10 +199,10 @@ struct endTag* create_end_tag(char *tag){
 struct startTag* create_start_tag(char *tag){
 	char *tagName;
 	vector<attribute*> attrs;
-	string text;
+	string t;
 	try{
 		// when parsing the tag, read in the attributes and text to the tag object
-		tagName = parse_tag(tag, attrs, text);
+		tagName = parse_tag(tag, attrs, t);
 	}
 	// catch exeption
 	catch(exception& e){
@@ -213,7 +213,7 @@ struct startTag* create_start_tag(char *tag){
 		string strName(tagName);
 		//cout<<strName<<endl;
 		st = new startTag(strName, true, false, attrs);
-		st->text = text;
+		st->text = t;
 	}
 	// cout<<st->name<<endl;
 	// cout<<st->is_start_tag<<endl;
