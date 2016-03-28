@@ -136,8 +136,8 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 					// extract attributes
 					string terminate = ">";
 					int size = strtag.find(terminate) - (strlen(tagName)+1);
-					cout<<"size "<<size<<endl;
-					cout<<strlen(tagName)<<endl;
+					//cout<<"size "<<size<<endl;
+					//cout<<strlen(tagName)<<endl;
 					string to_extract_attrs = strtag.substr(i, size);
 					attrs = extract_attrs(to_extract_attrs);
 
@@ -155,8 +155,6 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 			else{
 				string terminate = ">";
 				int size = strtag.find(terminate) - (strlen(tagName)+1);
-				cout<<"size "<<size<<endl;
-				cout<<strlen(tagName)<<endl;
 				string to_extract_attrs = strtag.substr(i, size);
 				attrs = extract_attrs(to_extract_attrs);
 				return tagName;
@@ -176,7 +174,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 }
 
 // create tag object for start tag
-struct endTag* creat_end_tag(char *tag){
+struct endTag* create_end_tag(char *tag){
 	char *tagName;
 	vector<attribute*> attrs;
 	string text;
@@ -189,11 +187,11 @@ struct endTag* creat_end_tag(char *tag){
 	struct endTag *et;
 	if (tagName != NULL){
 		string strName(tagName);
-		cout<<strName<<endl;
+		//cout<<strName<<endl;
 		et = new endTag(strName, true, false);
 	}
-	cout<<et->name<<endl;
-	cout<<et->is_end_tag<<endl;
+	//cout<<et->name<<endl;
+	//cout<<et->is_end_tag<<endl;
 	return et;
 }
 
@@ -213,14 +211,14 @@ struct startTag* create_start_tag(char *tag){
 	struct startTag *st;
 	if (tagName != NULL){
 		string strName(tagName);
-		cout<<strName<<endl;
+		//cout<<strName<<endl;
 		st = new startTag(strName, true, false, attrs);
 		st->text = text;
 	}
-	cout<<st->name<<endl;
-	cout<<st->is_start_tag<<endl;
-	cout<<st->is_end_tag<<endl;
-	cout<<st->attrs.size()<<endl;
+	// cout<<st->name<<endl;
+	// cout<<st->is_start_tag<<endl;
+	// cout<<st->is_end_tag<<endl;
+	// cout<<st->attrs.size()<<endl;
 	return st;
 }
 
@@ -236,6 +234,7 @@ void tokenize(char *html){
 	}
 }
 
+/*
 int main(){
 	//char html[] = "<html><head><body><a href='http://google.com'><p>The test html</p></body></head></html>";
 	//tokenize(html);
@@ -256,4 +255,4 @@ int main(){
 	print_attrs(attrs);
 	cout<<"text: "<<text<<endl;
 	cout<<endl;
-}
+}*/
