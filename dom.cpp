@@ -31,6 +31,8 @@ class Dom{
 		// the tag name, name attribute of id attribute
 		bool is_tag(string str);
 
+		Dom* getByTag(string tag);
+
 		~Dom();
 };
 
@@ -88,6 +90,21 @@ bool Dom::is_tag(string str){
 	}
 }
 
+Dom* Dom::getByTag(string tag){
+	if (this->is_tag(tag)){
+		return this;
+	}
+	else {
+		for (int i=0;i<children.size()i++){
+			if (children[i].is_tag(tag)){
+				return children[i];
+			}
+		}
+	}
+	cout<<"Tag do not exist";
+	return NULL;
+}
+
 Dom::~Dom(void){
 	cout<<"The dom object is being deleted"<<endl;
 }
@@ -117,6 +134,7 @@ int main(){
 	print_attrs(d2_attrs);
 	cout<<"child d2's text: "<<d1->get_children()[0]->get_text()<<endl;
 	cout<<"child d3's text: "<<d2->get_children()[0]->get_text()<<endl;
+	cout<<"d2 is b1: "<<d2->is_tag("'b1'")<<endl;
 	delete(d1);
 	delete(d2);
 	delete(d3);
