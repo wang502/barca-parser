@@ -25,6 +25,7 @@ class Dom{
 
 		vector<Dom*> get_children();
 
+
 		void add_child(Dom *d);
 
 		// check whether the str is same as 
@@ -37,7 +38,7 @@ class Dom{
 
 		bool has_link();
 
-		Dom* getByTag(string tag);
+		string getLink();
 
 		~Dom();
 };
@@ -120,20 +121,16 @@ bool Dom::has_link(){
 	return has;
 }
 
-Dom* Dom::getByTag(string tag){
-	if (this->is_tag(tag)){
-		return this;
-	}
-	else {
-		for (int i=0;i<children.size();i++){
-			if (children[i]->is_tag(tag)){
-				cout<<"heyhey"<<endl;
-				return children[i];
+string Dom::getLink(){
+	string l = "";
+	if (this->has_link()){
+		for (int i=0; i<self->attrs.size();i++){
+			if (self->attrs[i]->name == "href"){
+				l = self->attrs[i]->value;
 			}
 		}
 	}
-	cout<<"Tag do not exist";
-	return NULL;
+	return l;
 }
 
 Dom::~Dom(void){
@@ -169,6 +166,7 @@ int main(){
 	cout<<"d2's name is bb: "<<d2->is_name("'bb'")<<endl;
 	cout<<"d3 's id is li: "<<d3->is_id("'li'")<<endl;
 	cout<<"d2 has links: "<<d2->has_link()<<endl;
+	cout<<"d3's link: "<<d3->getLink()<<endl;
 	delete(d1);
 	delete(d2);
 	delete(d3);
