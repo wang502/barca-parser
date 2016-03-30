@@ -31,6 +31,12 @@ class Dom{
 		// the tag name, name attribute of id attribute
 		bool is_tag(string str);
 
+		bool is_name(string n);
+
+		bool is_id(string i);
+
+		bool has_link();
+
 		Dom* getByTag(string tag);
 
 		~Dom();
@@ -81,13 +87,37 @@ bool Dom::is_tag(string str){
 		return true;
 	}
 	else {
-		for (int i=0; i<self->attrs.size();i++){
-			if (self->attrs[i]->value == str){
-				return true;
-			}
-		}
 		return false;
 	}
+}
+bool Dom::is_name(string n){
+	bool is = false;
+	for (int i=0; i<self->attrs.size();i++){
+		if (self->attrs[i]->name == "name" && self->attrs[i]->value == n){
+			is = true;
+		}
+	}
+	return is;
+}
+
+bool Dom::is_id(string id){
+	bool is = false;
+	for (int i=0; i<self->attrs.size();i++){
+		if (self->attrs[i]->name == "id" && self->attrs[i]->value == id){
+			is = true;
+		}
+	}
+	return is;
+}
+
+bool Dom::has_link(){
+	bool has = false;
+	for (int i=0; i<self->attrs.size();i++){
+		if (self->attrs[i]->name == "href"){
+			has = true;
+		}
+	}
+	return has;
 }
 
 Dom* Dom::getByTag(string tag){
@@ -95,8 +125,9 @@ Dom* Dom::getByTag(string tag){
 		return this;
 	}
 	else {
-		for (int i=0;i<children.size()i++){
-			if (children[i].is_tag(tag)){
+		for (int i=0;i<children.size();i++){
+			if (children[i]->is_tag(tag)){
+				cout<<"heyhey"<<endl;
 				return children[i];
 			}
 		}
@@ -123,7 +154,7 @@ int main(){
 	
 	Dom *d2 = new Dom(st2, d1);
 	d1->add_child(d2);
-	char c[] = "<a href='http://golang.com'>This is a link";
+	char c[] = "<a href='http://golang.com' id='li'>This is a link";
 	startTag *st3 = create_start_tag(c);
 	
 	Dom *d3 = new Dom(st3, d2);
@@ -134,7 +165,10 @@ int main(){
 	print_attrs(d2_attrs);
 	cout<<"child d2's text: "<<d1->get_children()[0]->get_text()<<endl;
 	cout<<"child d3's text: "<<d2->get_children()[0]->get_text()<<endl;
-	cout<<"d2 is b1: "<<d2->is_tag("'b1'")<<endl;
+	cout<<"d2 is body tag: "<<d2->is_tag("<body")<<endl;
+	cout<<"d2's name is bb: "<<d2->is_name("'bb'")<<endl;
+	cout<<"d3 's id is li: "<<d3->is_id("'li'")<<endl;
+	cout<<"d2 has links: "<<d2->has_link()<<endl;
 	delete(d1);
 	delete(d2);
 	delete(d3);
