@@ -134,6 +134,10 @@ string Dom::getLink(){
 }
 
 Dom::~Dom(void){
+	for (int i=0; i<self->attrs.size();i++){
+		delete(self->attrs[i]);
+		cout<<"attribute deleted"<<endl;
+	}
 	cout<<"The dom object is being deleted"<<endl;
 }
 // add children dom to the current dom 
