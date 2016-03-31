@@ -5,10 +5,10 @@
 #include <vector>
 #include <exception>
 #include "tag_object.h"
-#include "test/test.cpp"
+#include "parse.h"
 
 using namespace std;
-/*
+
 void print_attr(attribute* attr){
 	cout<<"name: "<<attr->name<<" ";
 	cout<<"value: "<<attr->value<<endl;
@@ -19,7 +19,6 @@ void print_attrs(vector<attribute*> attrs){
 		print_attr(attrs[i]);
 	}
 }
-*/
 
 /*
 struct DOCTYPE{

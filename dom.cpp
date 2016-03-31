@@ -4,7 +4,8 @@
 #include <cmath>
 #include <exception>
 #include <vector>
-#include "parse.cpp"
+#include "parse.h"
+#include "tag_object.h"
 
 using namespace std;
 
@@ -146,6 +147,7 @@ void Dom::add_child(Dom* d){
 }
 
 // test the dom object
+
 int main(){
 	char h[] = "<html>";
 	startTag *st1 = create_start_tag(h);

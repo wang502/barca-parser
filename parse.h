@@ -1,6 +1,10 @@
 #ifdef PARSE_H
 #define PARSE_H
 
+void print_attr(attribute* attr);
+
+void print_attrs(vector<attribute*> attrs);
+
 vector<attribute*> extract_attrs(string str);
 
 char* parse_tag(char *tag, vector<attribute*>& attrs, string &text);
