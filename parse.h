@@ -1,5 +1,8 @@
-#ifdef PARSE_H
-#define PARSE_H
+#include <string>
+#include <vector>
+#include "tag_object.h"
+
+using namespace std;
 
 void print_attr(attribute* attr);
 
@@ -15,4 +18,3 @@ struct startTag* create_start_tag(char *tag);
 
 void tokenize(char *html);
 
-#endif

@@ -5,7 +5,6 @@
 #include <vector>
 #include <exception>
 #include "tag_object.h"
-#include "parse.h"
 
 using namespace std;
 

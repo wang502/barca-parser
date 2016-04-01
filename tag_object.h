@@ -1,7 +1,6 @@
 #include <vector>
 #include <cstring>
 
-
 using namespace std;
 
 struct DOCTYPE{
