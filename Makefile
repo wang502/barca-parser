@@ -9,8 +9,11 @@ all : $(OBJS)
 dom.o : dom.cpp parse.h
 	$(CC) $(CFLAGS) dom.cpp
 
-parse.o : parse.cpp
+parse.o : parse.cpp tag_object.h 
 	$(CC) $(CFLAGS) parse.cpp 
+
+test.o : test.cpp 
+	$(CC) $(CFLAGS) test.cpp
 
 clean : 
 	rm *.o *~

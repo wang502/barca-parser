@@ -8,46 +8,18 @@
 
 using namespace std;
 
+// print an attribute of html tag
 void print_attr(attribute* attr){
 	cout<<"name: "<<attr->name<<" ";
 	cout<<"value: "<<attr->value<<endl;
 }
 
+// print a vector of attribute of html tag
 void print_attrs(vector<attribute*> attrs){
 	for (int i=0; i<attrs.size();i++){
 		print_attr(attrs[i]);
 	}
 }
-
-/*
-struct DOCTYPE{
-	string name;
-	string publicid;
-	string sysid;
-	bool force_quirks;
-};
-
-struct attribute{
-	string name;
-	string value;
-	attribute(string name, string value):name(name), value(value){}
-};
-
-struct startTag{
-	string name;
-	bool is_start_tag;
-	bool is_end_tag;
-	vector<attribute*> attrs;
-	startTag(string name, bool start, bool end, vector<attribute*> attrs):name(name), is_start_tag(start), is_end_tag(end), attrs(attrs){}
-};
-
-struct endTag{
-	string name;
-	bool is_end_tag;
-	bool is_start_tag;
-	endTag(string name, bool end, bool start):name(name),is_end_tag(end), is_start_tag(start){}
-};
-*/
 
 // extract the attributes in a start tag
 vector<attribute*> extract_attrs(string str){
