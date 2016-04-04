@@ -196,16 +196,27 @@ void tokenize(char *html){
 	char *pch;
 	pch = strtok(html, "<");
 	string current_tag;
+	Dom *current_dom;
+	Dom *last_dom;
 	while (pch != NULL){
 		if (*pch == '/'){
 			struct endTag *et = create_end_tag(pch);
 			if (et->name == current_tag){
-				
+				current_dom = current_dom->parent;
+				last_dom = last_dom->parent;
 			}
 		}
 		else {
 			struct startTag *st = create_start_tag(pch);
 			current_tag = st->name;
+			current_dom = new Dom(st, NULL);
+			if (last_dom != NULL){
+				current_dom->parent = last_dom; 
+				last_dom->add_child(current_dom);
+			}
+			else {
+				last_dom = current_dom;
+			}
 		}
 		//cout<<pch<<endl;
 		pch = strtok(NULL, "<");
