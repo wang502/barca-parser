@@ -159,15 +159,15 @@ void Dom::add_child(Dom* d){
 // test the dom object
 
 int main(){
-	char h[] = "<html>";
+	char h[] = "html>";
 	startTag *st1 = create_start_tag(h);
 	Dom *d1 = new Dom(st1, NULL);
-	char b[] = "<body name='b1' id='bb'>This is body";
+	char b[] = "body name='b1' id='bb'>This is body";
 	startTag *st2 = create_start_tag(b);
 	
 	Dom *d2 = new Dom(st2, d1);
 	d1->add_child(d2);
-	char c[] = "<a href='http://golang.com' id='li'>This is a link";
+	char c[] = "a href='http://golang.com' id='li'>This is a link";
 	startTag *st3 = create_start_tag(c);
 	
 	Dom *d3 = new Dom(st3, d2);

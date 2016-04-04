@@ -195,9 +195,17 @@ struct startTag* create_start_tag(char *tag){
 void tokenize(char *html){
 	char *pch;
 	pch = strtok(html, "<");
+	string current_tag;
 	while (pch != NULL){
 		if (*pch == '/'){
-
+			struct endTag *et = create_end_tag(pch);
+			if (et->name == current_tag){
+				
+			}
+		}
+		else {
+			struct startTag *st = create_start_tag(pch);
+			current_tag = st->name;
 		}
 		//cout<<pch<<endl;
 		pch = strtok(NULL, "<");
