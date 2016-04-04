@@ -202,20 +202,18 @@ void tokenize(char *html){
 		if (*pch == '/'){
 			struct endTag *et = create_end_tag(pch);
 			if (et->name == current_tag){
-				current_dom = current_dom->parent;
+				current_dom = last_dom;
 				last_dom = last_dom->parent;
 			}
 		}
 		else {
+			last_dom = current_dom;
 			struct startTag *st = create_start_tag(pch);
 			current_tag = st->name;
 			current_dom = new Dom(st, NULL);
 			if (last_dom != NULL){
 				current_dom->parent = last_dom; 
 				last_dom->add_child(current_dom);
-			}
-			else {
-				last_dom = current_dom;
 			}
 		}
 		//cout<<pch<<endl;
