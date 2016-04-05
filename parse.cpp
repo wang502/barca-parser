@@ -192,12 +192,12 @@ struct startTag* create_start_tag(char *tag){
 	return st;
 }
 
-void tokenize(char *html){
+Dom* tokenize(char *html){
 	char *pch;
 	pch = strtok(html, "<");
 	string current_tag;
-	Dom *current_dom;
-	Dom *last_dom;
+	Dom *current_dom = NULL;
+	Dom *last_dom = NULL;
 	while (pch != NULL){
 		if (*pch == '/'){
 			struct endTag *et = create_end_tag(pch);
@@ -219,6 +219,7 @@ void tokenize(char *html){
 		//cout<<pch<<endl;
 		pch = strtok(NULL, "<");
 	}
+	return current_dom;
 }
 
 /*

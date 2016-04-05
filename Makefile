@@ -1,4 +1,5 @@
 OBJS = dom.o parse.o 
+PARSE = parse.o dom.o testparse.o
 CC = g++
 DEBUG = -g
 CFLAGS = -c
@@ -15,6 +16,8 @@ parse.o : parse.cpp tag_object.h
 test.o : test.cpp 
 	$(CC) $(CFLAGS) test.cpp
 
+testparse : $(PARSE)
+	$(CC) $(CFLAGS) testparse.cpp
 clean : 
 	rm *.o *~
 
