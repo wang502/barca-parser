@@ -31,4 +31,3 @@ struct endTag{
 	bool is_start_tag;
 	endTag(string name, bool end, bool start):name(name),is_end_tag(end), is_start_tag(start){}
 };
-

@@ -4,7 +4,6 @@
 #include <cmath>
 #include <vector>
 #include <exception>
-#include "tag_object.h"
 #include "Dom.h"
 
 using namespace std;

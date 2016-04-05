@@ -6,6 +6,7 @@
 #include <vector>
 #include "Dom.h"
 #include "parse.h"
+#include "tag_object.h"
 
 using namespace std;
 
