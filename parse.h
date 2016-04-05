@@ -1,6 +1,5 @@
 #include <string>
 #include <vector>
-#include "tag_object.h"
 
 using namespace std;
 

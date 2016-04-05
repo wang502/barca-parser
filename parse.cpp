@@ -5,6 +5,7 @@
 #include <vector>
 #include <exception>
 #include "tag_object.h"
+#include "Dom.h"
 
 using namespace std;
 
@@ -203,7 +204,7 @@ Dom* tokenize(char *html){
 			struct endTag *et = create_end_tag(pch);
 			if (et->name == current_tag){
 				current_dom = last_dom;
-				last_dom = last_dom->parent;
+				last_dom = last_dom->get_parent();
 			}
 		}
 		else {
@@ -212,7 +213,8 @@ Dom* tokenize(char *html){
 			current_tag = st->name;
 			current_dom = new Dom(st, NULL);
 			if (last_dom != NULL){
-				current_dom->parent = last_dom; 
+				//current_dom->parent = last_dom; 
+				current_dom->set_parent(last_dom);
 				last_dom->add_child(current_dom);
 			}
 		}

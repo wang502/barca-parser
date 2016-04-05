@@ -4,44 +4,9 @@
 #include <cmath>
 #include <exception>
 #include <vector>
-#include "parse.h"
+#include "Dom.h"
 
 using namespace std;
-
-class Dom{
-		startTag *self;
-		Dom *parent;
-		vector<Dom*> children;
-	public:
-		Dom(startTag*, Dom*);
-
-		vector<attribute*> get_attrs();
-
-		string get_name();
-
-		string get_text();
-
-		Dom* get_parent();
-
-		vector<Dom*> get_children();
-
-
-		void add_child(Dom *d);
-
-		// check whether the str is same as 
-		// the tag name, name attribute of id attribute
-		bool is_tag(string str);
-
-		bool is_name(string n);
-
-		bool is_id(string i);
-
-		bool has_link();
-
-		string getLink();
-
-		~Dom();
-};
 
 // constructor for Dom object
 Dom::Dom(startTag *st, Dom *p){
@@ -74,6 +39,10 @@ string Dom::get_text(){
 // get the parent of current dom
 Dom* Dom::get_parent(){
 	return parent;
+}
+
+void Dom::set_parent(Dom *p){
+	this->parent = p;
 }
 // get the vector of children
 vector<Dom*> Dom::get_children(){
@@ -157,7 +126,7 @@ void Dom::add_child(Dom* d){
 }
 
 // test the dom object
-
+/*
 int main(){
 	char h[] = "html>";
 	startTag *st1 = create_start_tag(h);
@@ -188,4 +157,4 @@ int main(){
 	delete(d3);
 	return 0;
 }
-
+*/

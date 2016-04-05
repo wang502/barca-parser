@@ -1,5 +1,6 @@
-OBJS = dom.o parse.o 
-PARSE = parse.o dom.o testparse.o
+OBJS = Dom.o parse.o 
+PARSE = parse.o Dom.o test_parse.o
+DOM = Dom.o test_dom.o parse.o
 CC = g++
 DEBUG = -g
 CFLAGS = -c
@@ -7,8 +8,8 @@ CFLAGS = -c
 all : $(OBJS)
 	$(CC) $(OBJS) -o main
 
-dom.o : dom.cpp parse.h
-	$(CC) $(CFLAGS) dom.cpp
+Dom.o : Dom.cpp Dom.h
+	$(CC) $(CFLAGS) Dom.cpp
 
 parse.o : parse.cpp tag_object.h 
 	$(CC) $(CFLAGS) parse.cpp 
@@ -16,8 +17,18 @@ parse.o : parse.cpp tag_object.h
 test.o : test.cpp 
 	$(CC) $(CFLAGS) test.cpp
 
+test_parse.o : test_parse.cpp
+	$(CC) $(CFLAGS) test_parse.cpp 
+
 testparse : $(PARSE)
-	$(CC) $(CFLAGS) testparse.cpp
+	$(CC) $(PARSE) -o main
+
+test_dom.o : test_dom.cpp parse.h Dom.h
+	$(CC) $(CFLAGS) test_dom.cpp
+
+testdom : $(DOM)
+	$(CC) $(DOM) -o main
+
 clean : 
 	rm *.o *~
 
