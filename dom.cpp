@@ -13,7 +13,7 @@ Dom::Dom(startTag *st, Dom *p){
 	self = st;
 	parent = p;
 }
-
+ 
 // get the attributes of current dom
 vector<attribute*> Dom::get_attrs(){
 	vector<attribute*> attrs;
