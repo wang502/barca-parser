@@ -4,6 +4,7 @@
 #include <cmath>
 #include <vector>
 #include <exception>
+#include <stack>
 #include "Dom.h"
 
 using namespace std;
@@ -192,38 +193,38 @@ struct startTag* create_start_tag(char *tag){
 	return st;
 }
 
+
 Dom* tokenize(char *html){
 	char *pch;
 	pch = strtok(html, "<");
 	string current_tag;
+	stack<Dom*> s;
 	Dom *current_dom = NULL;
 	Dom *last_dom = NULL;
+	Dom *result = NULL;
+	s.push(last_dom);
 	while (pch != NULL){
 		if (*pch == '/'){
 			struct endTag *et = create_end_tag(pch);
-			if (et->name == current_tag){
-				current_dom = last_dom;
-				//current_dom = current_dom->get_parent();
-				last_dom = last_dom->get_parent();
-				//last_dom = current_dom->get_parent();
+			last_dom = s.top();
+			if (last_dom->get_name() == et->name){
+				  result = s.top();
+					s.pop();
 			}
 		}
 		else {
-			last_dom = current_dom;
 			struct startTag *st = create_start_tag(pch);
-			current_tag = st->name;
-			current_dom = new Dom(st, NULL);
-			cout<<"cur tag: "<<current_tag<<endl;
+			last_dom = s.top();
+			current_dom = new Dom(st, last_dom);
 			if (last_dom != NULL){
-				//current_dom->parent = last_dom;
-				current_dom->set_parent(last_dom);
 				last_dom->add_child(current_dom);
 			}
+			s.push(current_dom);
 		}
 		//cout<<pch<<endl;
 		pch = strtok(NULL, "<");
 	}
-	return current_dom->get_parent();
+	return result;
 }
 
 /*
