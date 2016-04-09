@@ -32,7 +32,7 @@ string Dom::get_name(){
 }
 
 // get the text if the current dom has text
-string Dom::get_text(){
+string Dom::getText(){
 	return self->text;
 }
 

@@ -10,7 +10,7 @@
 using namespace std;
 
 int main(){
-	char html[] = "<html><head><script></script></head><body><a href='http://google.com'></a><div></div><p>The test html</p></body></html>";
+	char html[] = "<html><head><script></script></head><body><a href='http://google.com'>redirect to</a><div></div><div></div><p>The test html</p></body></html>";
 	//char html[] = "<body><a href='http://google.com'></a><p>The test html</p></body>";
 	Dom *d = tokenize(html);
 	cout<<d->get_name()<<endl; //html
@@ -18,24 +18,9 @@ int main(){
 	cout<<d->get_children()[0]->get_name()<<endl;  //head
 	cout<<d->get_children()[0]->get_children().size()<<endl;  //1
 	cout<<d->get_children()[1]->get_name()<<endl;  //body
-	cout<<d->get_children()[1]->get_children().size()<<endl;  //3
+	cout<<d->get_children()[1]->get_children().size()<<endl;  //4
+	cout<<d->get_children()[1]->get_children()[0]->getLink()<<endl; // 'http//google.com'
+	cout<<d->get_children()[1]->get_children()[0]->getText()<<endl; // 'resirect to'
+	cout<<d->get_children()[1]->get_children()[3]->getText()<<endl; // 'The test html'
 	delete(d);
-	/*
-	char tag[] = "div id='layout1' name='l1'>";
-	char *tagName = getTagName(tag);
-	struct startTag *st = createStartTag(tag);
-	char chars[] = "<ll name=layout id='l1'>This is paragraph";
-	string str(chars);
-	string sep = "=";
-	cout<<str.find(sep);
-	str = str.substr(0, str.find(sep));
-	cout<<str<<endl;
-
-	vector<attribute*> attrs;
-	string text;
-	char *tagname = parse_tag(chars, attrs, text);
-	cout<<tagname<<endl;
-	print_attrs(attrs);
-	cout<<"text: "<<text<<endl;
-	cout<<endl;*/
 }

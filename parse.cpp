@@ -87,6 +87,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 	else {
 		string toFind = "=";
 		string strtag(tag);
+		cout<<"strtag: "<<strtag<<endl;
 		char *tagName = new char[10];
 
 		// contains =, then contains attributes
@@ -102,6 +103,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 			i++;
 			// having texts followed
 			if (*(strtag.end()-1) != '>'){
+				cout<<"strtag: "<<strtag<<endl;
 				int sep;
 				if ((sep = strtag.find(">")) != string::npos){
 					// extract attributes
@@ -115,6 +117,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 					// extract text
 					string extracted_text = strtag.substr(strtag.find(">")+1);
 					text = extracted_text;
+					cout<<"text: "<<text<<endl;
 					return tagName;
 				}
 				else {
@@ -139,6 +142,12 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 				i++;
 			}
 			tagName[i] = '\0';
+			// having text
+			if (*(strtag.end()-1) != '>'){
+				// extract text
+				string extracted_text = strtag.substr(strtag.find(">")+1);
+				text = extracted_text;
+			}
 			return tagName;
 		}
 	}

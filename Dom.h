@@ -13,7 +13,7 @@ class Dom{
 
 		string get_name();
 
-		string get_text();
+		string getText();
 
 		Dom* get_parent();
 
@@ -24,7 +24,7 @@ class Dom{
 
 		void add_child(Dom *d);
 
-		// check whether the str is same as 
+		// check whether the str is same as
 		// the tag name, name attribute of id attribute
 		bool is_tag(string str);
 
