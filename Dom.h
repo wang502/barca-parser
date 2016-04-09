@@ -21,7 +21,6 @@ class Dom{
 
 		vector<Dom*> get_children();
 
-
 		void add_child(Dom *d);
 
 		// check whether the str is same as
@@ -32,11 +31,19 @@ class Dom{
 
 		bool is_id(string i);
 
+		bool is_href(string link);
+
+		bool has_attribute(string attr_name);
+		
 		bool has_link();
 
 		string getLink();
 
+		vector<Dom*> find(string filter);
+
 		~Dom();
 };
+
+void find_helper(Dom *me, vector<Dom*> &result, string filter);
 
 #endif

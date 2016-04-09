@@ -8,6 +8,21 @@
 
 using namespace std;
 
+void find_helper(Dom *me, vector<Dom*> &result, string filter){
+	if (me == NULL){
+		return;
+	}
+	else {
+		//cout<<"finding: "<<me->get_name()<<endl;
+		if (me->is_tag(filter) || me->has_attribute(filter)){
+			result.push_back(me);
+		}
+		for (int i=0; i<me->get_children().size(); i++){
+			find_helper(me->get_children()[i], result, filter);
+		}
+	}
+}
+
 // constructor for Dom object
 Dom::Dom(startTag *st, Dom *p){
 	self = st;
@@ -88,6 +103,26 @@ bool Dom::is_id(string id){
 	return is;
 }
 
+bool Dom::is_href(string link){
+	bool is = false;
+	for (int i=0; i<self->attrs.size();i++){
+		if (self->attrs[i]->name == "href" && self->attrs[i]->value == link){
+			is = true;
+		}
+	}
+	return is;
+}
+
+bool Dom::has_attribute(string attr_name){
+	bool has = false;
+	for (int i=0; i<self->attrs.size();i++){
+		if (self->attrs[i]->name == attr_name){
+			has = true;
+		}
+	}
+	return has;
+}
+
 // check whther current dom has a link
 bool Dom::has_link(){
 	bool has = false;
@@ -110,6 +145,12 @@ string Dom::getLink(){
 		}
 	}
 	return l;
+}
+
+vector<Dom*> Dom::find(string filter){
+	vector<Dom*> result;
+	find_helper(this, result, filter);
+	return result;
 }
 
 // destructor of Dom
