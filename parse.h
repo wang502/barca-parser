@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-
+#include "Dom.h"
 using namespace std;
 
 void print_attr(attribute* attr);
@@ -15,5 +15,4 @@ struct endTag* create_end_tag(char *tag);
 
 struct startTag* create_start_tag(char *tag);
 
-void tokenize(char *html);
-
+Dom* tokenize(char *html);

@@ -32,9 +32,9 @@ vector<attribute*> extract_attrs(string str){
 	while ((str.find(sep1) != string::npos) || (str.find(sep2) != string::npos)){
 		end1 = str.find(sep1);
 		end2 = str.find(sep2);
-		//cout<<end1<<" "<<end2<<endl;		
+		//cout<<end1<<" "<<end2<<endl;
 		if (end1 != string::npos && end2 != string::npos){
-			if (end1 < end2){		
+			if (end1 < end2){
 				//cout<<end1<<endl;
 				words.push_back(str.substr(0, end1));
 				str = str.substr(end1+1);
@@ -87,7 +87,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 		string toFind = "=";
 		string strtag(tag);
 		char *tagName = new char[10];
-		
+
 		// contains =, then contains attributes
 		if (strtag.find(toFind)!=string::npos){
 			int i=0;
@@ -113,7 +113,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 
 					// extract text
 					string extracted_text = strtag.substr(strtag.find(">")+1);
-					text = extracted_text; 
+					text = extracted_text;
 					return tagName;
 				}
 				else {
@@ -132,7 +132,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 		}
 		// wothout attributes
 		else {
-			int i=0; 	
+			int i=0;
 			while (strtag[i] != '>'){
 				tagName[i] = strtag[i];
 				i++;
@@ -203,7 +203,9 @@ Dom* tokenize(char *html){
 			struct endTag *et = create_end_tag(pch);
 			if (et->name == current_tag){
 				current_dom = last_dom;
+				//current_dom = current_dom->get_parent();
 				last_dom = last_dom->get_parent();
+				//last_dom = current_dom->get_parent();
 			}
 		}
 		else {
@@ -211,8 +213,9 @@ Dom* tokenize(char *html){
 			struct startTag *st = create_start_tag(pch);
 			current_tag = st->name;
 			current_dom = new Dom(st, NULL);
+			cout<<"cur tag: "<<current_tag<<endl;
 			if (last_dom != NULL){
-				//current_dom->parent = last_dom; 
+				//current_dom->parent = last_dom;
 				current_dom->set_parent(last_dom);
 				last_dom->add_child(current_dom);
 			}
@@ -220,12 +223,12 @@ Dom* tokenize(char *html){
 		//cout<<pch<<endl;
 		pch = strtok(NULL, "<");
 	}
-	return current_dom;
+	return current_dom->get_parent();
 }
 
 /*
 int main(){
-	//char html[] = "<html><head><body><a href='http://google.com'><p>The test html</p></body></head></html>";
+	//char html[] = "<html><head></head><body><a href='http://google.com'></a><p>The test html</p></body></html>";
 	//tokenize(html);
 	//char tag[] = "div id='layout1' name='l1'>";
 	//char *tagName = getTagName(tag);
@@ -236,11 +239,11 @@ int main(){
 	//cout<<str.find(sep);
 	//str = str.substr(0, str.find(sep));
 	//cout<<str<<endl;
-		
+
 	vector<attribute*> attrs;
 	string text;
 	char *tagname = parse_tag(chars, attrs, text);
-	cout<<tagname<<endl;	
+	cout<<tagname<<endl;
 	print_attrs(attrs);
 	cout<<"text: "<<text<<endl;
 	cout<<endl;
