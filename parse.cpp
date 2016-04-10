@@ -14,6 +14,7 @@ using namespace std;
 //unordered_map<string, bool> m;
 
 extern map<string, bool> m;
+
 // print an attribute of html tag
 void print_attr(attribute* attr){
 	cout<<"name: "<<attr->name<<" ";
@@ -207,7 +208,9 @@ struct startTag* create_start_tag(char *tag){
 
 
 Dom* tokenize(char *html){
-	print();
+	// populate m with no-paired tag names
+	populate_no_paired();
+
 	char *pch;
 	pch = strtok(html, "<");
 	string current_tag;

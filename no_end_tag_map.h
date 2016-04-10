@@ -5,7 +5,7 @@ using namespace std;
 
 map<string, bool> m;
 
-void print(){
+void populate_no_paired(){
   m["button"] = true;
   m["br"] = true;
   m["col"] = true;
