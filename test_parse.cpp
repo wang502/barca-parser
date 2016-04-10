@@ -25,7 +25,7 @@ int main(){
 	cout<<d->find("href")[0]->getLink()<<endl;  // 'http://google.com'
 	cout<<d->find("href")[1]->getLink()<<endl;  // 'http://twitter.com'
 	cout<<d->find("a")[2]->getLink()<<endl;    // 'http://facebook.com'*/
-	char html2[] = "<body><div class='header-top'><div class='logo'><a href='/'><img src='/images/logooo.png'></img></a></div><div class='header-search'><form action='/search' id='header-search-form'><input type='text' id='search-box' name='school' class='school' placeholder='搜索学校,如: Stanford University'></input><ul class='search-dropdown'></ul><span type='submit' id='search-button'><i class='icon icon-search'></i></span></form></div></div></body>";
+	char html2[] = "<body><div class='header-top'><div class='logo'><a href='/'><img src='/images/logooo.png'></a></div><div class='header-search'><form action='/search' id='header-search-form'><input type='text' id='search-box' name='school' class='school' placeholder='搜索学校,如: Stanford University'><ul class='search-dropdown'></ul><span type='submit' id='search-button'><i class='icon icon-search'></i></span></form></div></div></body>";
 	Dom *d = tokenize(html2);
 	cout<<d->get_name()<<endl; //html
 	cout<<d->get_children().size()<<endl;  //2

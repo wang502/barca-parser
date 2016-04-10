@@ -5,10 +5,15 @@
 #include <vector>
 #include <exception>
 #include <stack>
+#include <unordered_map>
 #include "Dom.h"
+#include "no_end_tag_map.h"
 
 using namespace std;
 
+//unordered_map<string, bool> m;
+
+extern map<string, bool> m;
 // print an attribute of html tag
 void print_attr(attribute* attr){
 	cout<<"name: "<<attr->name<<" ";
@@ -202,6 +207,7 @@ struct startTag* create_start_tag(char *tag){
 
 
 Dom* tokenize(char *html){
+	print();
 	char *pch;
 	pch = strtok(html, "<");
 	string current_tag;
@@ -226,7 +232,10 @@ Dom* tokenize(char *html){
 			if (last_dom != NULL){
 				last_dom->add_child(current_dom);
 			}
-			s.push(current_dom);
+			if (m.find(st->name)==m.end()){
+				s.push(current_dom);
+			}
+			//s.push(current_dom);
 		}
 		//cout<<pch<<endl;
 		pch = strtok(NULL, "<");
