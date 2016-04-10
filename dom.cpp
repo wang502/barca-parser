@@ -36,7 +36,7 @@ vector<attribute*> Dom::get_attrs(){
 				attrs = self->attrs;
 			}
 			catch(exception &e){
-				cout<<e.what();
+				cout<<"Exception name: "<<e.what();
 			}
 			return attrs;
 }
@@ -66,7 +66,7 @@ vector<Dom*> Dom::get_children(){
 		childs = children;
 	}
 	catch(exception &e){
-		cout<<e.what();
+		cout<<"Exception name: "<<e.what();
 	}
 	return childs;
 }
