@@ -25,15 +25,17 @@ int main(){
 	cout<<d->find("href")[0]->getLink()<<endl;  // 'http://google.com'
 	cout<<d->find("href")[1]->getLink()<<endl;  // 'http://twitter.com'
 	cout<<d->find("a")[2]->getLink()<<endl;    // 'http://facebook.com'*/
-	char html2[] = "<body><div class='header-top'><div class='logo'><a href='/'><img src='/images/logooo.png'></a></div><div class='header-search'><form action='/search' id='header-search-form'><input type='text' id='search-box' name='school' class='school' placeholder='搜索学校,如: Stanford University'><ul class='search-dropdown'></ul><span type='submit' id='search-button'><i class='icon icon-search'></i></span></form></div></div></body>";
+	char html2[] = "<html><head><script><img src='/images/second.png'></script></head><body><div class='header-top'><div class='logo'><a href='/'><img src='/images/logooo.png'></a></div><div class='header-search'><form action='/search' id='header-search-form'><input type='text' id='search-box' name='school' class='school' placeholder='搜索学校,如: Stanford University'><ul class='search-dropdown'></ul><span type='submit' id='search-button'><i class='icon icon-search'></i></span></form></div></div></body></html>";
 	Dom *d = tokenize(html2);
 	cout<<d->get_name()<<endl; //html
 	cout<<d->get_children().size()<<endl;  //2
 	cout<<d->get_children()[0]->get_name()<<endl;  //head
-	cout<<d->get_children()[0]->get_children().size()<<endl;
-	cout<<d->get_children()[0]->get_children()[0]->get_name()<<endl;
-	cout<<d->get_children()[0]->get_children()[0]->find("a")[0]->getLink()<<endl;
-
+	cout<<d->get_children()[0]->get_children().size()<<endl; // 1
+	cout<<d->get_children()[0]->get_children()[0]->get_name()<<endl; //script
+	cout<<d->get_children()[1]->get_children()[0]->get_children()[0]->find("a")[0]->getLink()<<endl;  // '/'
+	cout<<d->find("img")[1]->getImg()<<endl;	// '/images/logooo.png'
+	cout<<d->get_children()[1]->get_children()[0]->get_attrs()[0]->value<<endl;
+	cout<<d->find("'logo'")[0]->find("a")[0]->getLink()<<endl;  //  /
 	// issue: img, input, form tag has no terminate tag
 	delete(d);
 }

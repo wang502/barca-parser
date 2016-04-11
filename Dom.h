@@ -34,10 +34,14 @@ class Dom{
 		bool is_href(string link);
 
 		bool has_attribute(string attr_name);
-		
+
 		bool has_link();
 
+		bool has_img();
+
 		string getLink();
+
+		string getImg();
 
 		vector<Dom*> find(string filter);
 

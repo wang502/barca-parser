@@ -206,7 +206,6 @@ struct startTag* create_start_tag(char *tag){
 	return st;
 }
 
-
 Dom* tokenize(char *html){
 	// populate m with no-paired tag names
 	populate_no_paired();

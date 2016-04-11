@@ -8,6 +8,7 @@
 
 using namespace std;
 
+// find the targeted dom child recursively
 void find_helper(Dom *me, vector<Dom*> &result, string filter){
 	if (me == NULL){
 		return;
@@ -116,7 +117,7 @@ bool Dom::is_href(string link){
 bool Dom::has_attribute(string attr_name){
 	bool has = false;
 	for (int i=0; i<self->attrs.size();i++){
-		if (self->attrs[i]->name == attr_name){
+		if (self->attrs[i]->value == attr_name){
 			has = true;
 		}
 	}
@@ -125,13 +126,19 @@ bool Dom::has_attribute(string attr_name){
 
 // check whther current dom has a link
 bool Dom::has_link(){
+	/*
 	bool has = false;
 	for (int i=0; i<self->attrs.size();i++){
 		if (self->attrs[i]->name == "href"){
 			has = true;
 		}
 	}
-	return has;
+	return has;*/
+	return (self->name == "a");
+}
+
+bool Dom::has_img(){
+	return (self->name == "img");
 }
 
 // get the link if current dom has link
@@ -143,6 +150,25 @@ string Dom::getLink(){
 				l = self->attrs[i]->value;
 			}
 		}
+	}
+	else {
+		l = "Error finding link";
+	}
+	return l;
+}
+
+// get the img src if the current dom is img dom
+string Dom::getImg(){
+	string l = "";
+	if (this->has_img()){
+		for (int i=0; i<self->attrs.size();i++){
+			if (self->attrs[i]->name == "src"){
+				l = self->attrs[i]->value;
+			}
+		}
+	}
+	else {
+		l = "Error finding img src";
 	}
 	return l;
 }
