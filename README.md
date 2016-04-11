@@ -7,10 +7,10 @@ The reason I name it as barca-parser is because I am a big fan of [FC Barcelona.
 ### Testing
 test the parser:
 
-    make testparser
-    ./main
+    $ make testparser
+    $ ./main
 
 test the Dom object:
 
-    make testdom
-    ./main
+    $ make testdom
+    $ ./main
