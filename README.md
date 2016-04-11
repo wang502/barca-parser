@@ -15,6 +15,9 @@ When reading in a ending tag, pop the last Dom out of the stack.
 
 The remaining Dom in the Stack is the Dom object that stores all the HTML elements.
 
+### Tree
+A Dom object is a recursive tree structure. It contains its tag elements(tagname, attribute pairs) and its list of children.
+
 ## Testing
 test the parser:
 
