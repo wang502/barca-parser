@@ -4,6 +4,15 @@ This is an HTML parser for C++. It parses HTML files into C++ objects. It is imp
 
 The reason I name it as barca-parser is because I am a big fan of [FC Barcelona.](www.fcbarcelona.com/)
 
+### Data structure used in parsing:
+Stack is used when processing the HTML buffer.
+
+When reading in a starting tag, pop the last Dom object, add the current Dom to last Dom's children list, push to the stack.
+
+When reading in a ending tag, pop the last Dom out of the stack.
+
+The remaining Dom in the Stack is the Dom object that stores all the HTML elements.
+
 ### Testing
 test the parser:
 
