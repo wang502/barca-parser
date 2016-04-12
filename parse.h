@@ -15,4 +15,8 @@ struct endTag* create_end_tag(char *tag);
 
 struct startTag* create_start_tag(char *tag);
 
+void read_html(char *filename);
+
 Dom* tokenize(char *html);
+
+Dom* parse_html(char *filename);

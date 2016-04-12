@@ -11,6 +11,7 @@
 
 using namespace std;
 
+#define MAX_BUF_SIZE 10000
 //unordered_map<string, bool> m;
 
 extern map<string, bool> m;
@@ -121,7 +122,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 					// extract text
 					string extracted_text = strtag.substr(strtag.find(">")+1);
 					text = extracted_text;
-					cout<<"text: "<<text<<endl;
+					//cout<<"text: "<<text<<endl;
 					return tagName;
 				}
 				else {
@@ -206,13 +207,29 @@ struct startTag* create_start_tag(char *tag){
 	return st;
 }
 
+// Read HTML text into buffer
+void read_html(char *filename, char *buf){
+	FILE *fp = fopen(filename, "r");
+	if (fp != NULL){
+		size_t newLen = fread(buf, sizeof(char), MAX_BUF_SIZE, fp);
+		if (newLen == 0){
+			cout<<"Error reading HTML file"<<endl;
+			exit(0);
+		}
+		else {
+			buf[newLen++] = '\0';
+		}
+	}
+	fclose(fp);
+}
+
  //🤓//Tokenize the HTML buffer and parse the elements to Dom object
-Dom* tokenize(char *html){
+Dom* tokenize(char *html_buf){
 	// populate m with no-paired tag names
 	populate_no_paired();
 
 	char *pch;
-	pch = strtok(html, "<");
+	pch = strtok(html_buf, "<");
 	string current_tag;
 	stack<Dom*> s;
 	Dom *current_dom = NULL;
@@ -244,6 +261,13 @@ Dom* tokenize(char *html){
 		pch = strtok(NULL, "<");
 	}
 	return result;
+}
+
+Dom* parse_html(char *filename){
+	char html_buf[MAX_BUF_SIZE+1];
+	read_html(filename, html_buf);
+	Dom *d = tokenize(html_buf);
+	return d;
 }
 
 /*

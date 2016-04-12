@@ -12,7 +12,8 @@ using namespace std;
 int main(){
 	char html[] = "<html><head><script></script></head><body><a href='http://google.com'>redirect to</a><div><a href='http://twitter.com'></a></div><div><a href='http://facebook.com'></a></div><p>The test html</p></body></html>";
 	//char html[] = "<body><a href='http://google.com'></a><p>The test html</p></body>";
-	/*Dom *d = tokenize(html);
+	/*
+	Dom *d = tokenize(html);
 	cout<<d->get_name()<<endl; //html
 	cout<<d->get_children().size()<<endl;  //2
 	cout<<d->get_children()[0]->get_name()<<endl;  //head
@@ -24,9 +25,14 @@ int main(){
 	cout<<d->get_children()[1]->get_children()[3]->getText()<<endl; // 'The test html'
 	cout<<d->find("href")[0]->getLink()<<endl;  // 'http://google.com'
 	cout<<d->find("href")[1]->getLink()<<endl;  // 'http://twitter.com'
-	cout<<d->find("a")[2]->getLink()<<endl;    // 'http://facebook.com'*/
+	cout<<d->find("a")[2]->getLink()<<endl;    // 'http://facebook.com'
+	*/
+	/*
 	char html2[] = "<html><head><script><img src='/images/second.png'></script></head><body><div class='header-top'><div class='logo'><a href='/'><img src='/images/logooo.png'></a></div><div class='header-search'><form action='/search' id='header-search-form'><input type='text' id='search-box' name='school' class='school' placeholder='搜索学校,如: Stanford University'><ul class='search-dropdown'></ul><span type='submit' id='search-button'><i class='icon icon-search'></i></span></form></div></div></body></html>";
 	Dom *d = tokenize(html2);
+	*/
+	char filename[] = "test.html";
+	Dom *d = parse_html(filename);
 	cout<<d->get_name()<<endl; //html
 	cout<<d->get_children().size()<<endl;  //2
 	cout<<d->get_children()[0]->get_name()<<endl;  //head
@@ -36,6 +42,22 @@ int main(){
 	cout<<d->find("img")[1]->getImg()<<endl;	// '/images/logooo.png'
 	cout<<d->get_children()[1]->get_children()[0]->get_attrs()[0]->value<<endl;
 	cout<<d->find("'logo'")[0]->find("a")[0]->getLink()<<endl;  //  /
-	// issue: img, input, form tag has no terminate tag
 	delete(d);
+	// issue: img, input, form tag has no terminate tag
+
+	/*
+	char buf[1000+1];
+	FILE *fp = fopen("test.html", "r");
+	if (fp != NULL){
+		size_t newLen = fread(buf, sizeof(char), 1000, fp);
+		if (newLen == 0){
+			cout<<"Error reading HTML file"<<endl;
+		}
+		else {
+			buf[newLen++] = '\0';
+		}
+	}
+	cout<<buf<<endl;
+	fclose(fp);
+	*/
 }
