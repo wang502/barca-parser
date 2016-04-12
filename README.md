@@ -4,6 +4,9 @@ This is an HTML parser for C++. It parses HTML files into C++ objects. It is imp
 
 The reason I name it as barca-parser is because I am a big fan of [FC Barcelona.](http://www.fcbarcelona.com) 🤓
 
+## Purpose
+This light weight HTML parser is a good example for understanding basic string parsing, usage of data structure and recursions. And it is also usable.
+
 ## Data structure used in parsing:
 
 ###Stack

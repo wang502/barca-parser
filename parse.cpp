@@ -34,7 +34,7 @@ vector<attribute*> extract_attrs(string str){
 	vector<string> words;
 	string sep1 = "=";
 	string sep2 = " ";
-	int start = 0, end1=0, end2=0;;
+	int start = 0, end1=0, end2=0;
 
 	while ((str.find(sep1) != string::npos) || (str.find(sep2) != string::npos)){
 		end1 = str.find(sep1);
@@ -206,6 +206,7 @@ struct startTag* create_start_tag(char *tag){
 	return st;
 }
 
+ //🤓//Tokenize the HTML buffer and parse the elements to Dom object
 Dom* tokenize(char *html){
 	// populate m with no-paired tag names
 	populate_no_paired();
