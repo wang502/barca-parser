@@ -41,23 +41,8 @@ int main(){
 	cout<<d->get_children()[1]->get_children()[0]->get_children()[0]->find("a")[0]->getLink()<<endl;  // '/'
 	cout<<d->find("img")[1]->getImg()<<endl;	// '/images/logooo.png'
 	cout<<d->get_children()[1]->get_children()[0]->get_attrs()[0]->value<<endl;
-	cout<<d->find("'logo'")[0]->find("a")[0]->getLink()<<endl;  //  /
+	cout<<d->find("\"logo\"")[0]->find("a")[0]->getLink()<<endl;  //  /
 	delete(d);
-	// issue: img, input, form tag has no terminate tag
+	// issue solved: img, input, form tag has no terminate tag
 
-	/*
-	char buf[1000+1];
-	FILE *fp = fopen("test.html", "r");
-	if (fp != NULL){
-		size_t newLen = fread(buf, sizeof(char), 1000, fp);
-		if (newLen == 0){
-			cout<<"Error reading HTML file"<<endl;
-		}
-		else {
-			buf[newLen++] = '\0';
-		}
-	}
-	cout<<buf<<endl;
-	fclose(fp);
-	*/
 }

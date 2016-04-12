@@ -30,4 +30,4 @@ testdom : $(DOM)
 	$(CC) $(DOM) -o main
 
 clean :
-	rm *.o *~
+	rm *.o *~ main

@@ -12,7 +12,6 @@
 using namespace std;
 
 #define MAX_BUF_SIZE 10000
-//unordered_map<string, bool> m;
 
 extern map<string, bool> m;
 
@@ -96,7 +95,7 @@ char* parse_tag(char *tag, vector<attribute*>& attrs, string &text){
 		string strtag(tag);
 		char *tagName = new char[10];
 
-		// contains =, then contains attributes
+		// contains '=', then contains attributes
 		if (strtag.find(toFind)!=string::npos){
 			int i=0;
 			while (strtag[i] != ' '){
@@ -214,11 +213,13 @@ void read_html(char *filename, char *buf){
 		size_t newLen = fread(buf, sizeof(char), MAX_BUF_SIZE, fp);
 		if (newLen == 0){
 			cout<<"Error reading HTML file"<<endl;
-			exit(0);
 		}
 		else {
 			buf[newLen++] = '\0';
 		}
+	}
+	else {
+		cout<<"File not found"<<endl;
 	}
 	fclose(fp);
 }
@@ -263,32 +264,10 @@ Dom* tokenize(char *html_buf){
 	return result;
 }
 
+// Parse html
 Dom* parse_html(char *filename){
 	char html_buf[MAX_BUF_SIZE+1];
 	read_html(filename, html_buf);
 	Dom *d = tokenize(html_buf);
 	return d;
 }
-
-/*
-int main(){
-	//char html[] = "<html><head></head><body><a href='http://google.com'></a><p>The test html</p></body></html>";
-	//tokenize(html);
-	//char tag[] = "div id='layout1' name='l1'>";
-	//char *tagName = getTagName(tag);
-	//struct startTag *st = createStartTag(tag);
-	char chars[] = "<ll name=layout id='l1'>This is paragraph";
-	//string str(chars);
-	//string sep = "=";
-	//cout<<str.find(sep);
-	//str = str.substr(0, str.find(sep));
-	//cout<<str<<endl;
-
-	vector<attribute*> attrs;
-	string text;
-	char *tagname = parse_tag(chars, attrs, text);
-	cout<<tagname<<endl;
-	print_attrs(attrs);
-	cout<<"text: "<<text<<endl;
-	cout<<endl;
-}*/
